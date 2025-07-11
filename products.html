@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Продукция | Мука и Отруби</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #faf9f6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #f4a261;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      color: #444;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card h2 {
+      font-size: 20px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .product-images {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .product-images img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .product-images img:hover {
+      border-color: #f4a261;
+    }
+
+    button {
+      background: #f4a261;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background: #e07b39;
+    }
+
+    /* Модальное окно заказа */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .modal-close:hover {
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    /* Модальное окно просмотра изображений */
+    .image-modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.1);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-modal.active {
+      display: flex;
+    }
+
+    .image-modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+.image-modal-content img {
+  width: auto;
+  height: auto;
+  max-width: 700px;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .image-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 8px;
+    }
+
+    .image-nav:hover {
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .image-prev {
+      left: -60px;
+    }
+
+    .image-next {
+      right: -60px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Логотип" class="logo" />
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="products.html">Продукция</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="about.html">О нас</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Наша продукция</h1>
+
+    <div class="grid">
+      <!-- Продукт 1 -->
+      <div class="product-card">
+        <h2>Мука пшеничная высшего сорта</h2>
+        <div class="product-images" data-images="photo1.jpg,photo3.jpg,photo4.jpg">
+          <img src="photo1.jpg" onclick="openImageModal(this)" alt="">
+          <img src="photo3.jpg" onclick="openImageModal(this)" alt="">
+          <img src="photo4.jpg" onclick="openImageModal(this)" alt="">
+        </div>
+        <p>Отборная мука, идеально подходит для хлеба, пирогов и блинов.</p>
+        <button onclick="openModal('Мука пшеничная высшего сорта')">Заказать</button>
+      </div>
+
+      <!-- Продукт 2 -->
+      <div class="product-card">
+        <h2>Мука пшеничная первого сорта</h2>
+        <div class="product-images" data-images="photo3.jpg">
+          <img src="photo3.jpg" onclick="openImageModal(this)" alt="">
+        </div>
+        <p>Натуральная мука, универсальна в приготовлении пищи.</p>
+        <button onclick="openModal('Мука пшеничная первого сорта')">Заказать</button>
+      </div>
+
+      <!-- Продукт 3 -->
+      <div class="product-card">
+        <h2>Пшеничные отруби</h2>
+        <div class="product-images" data-images="photo2.jpg,photo5.jpg">
+          <img src="photo2.jpg" onclick="openImageModal(this)" alt="">
+          <img src="photo5.jpg" onclick="openImageModal(this)" alt="">
+        </div>
+        <p>Полезный источник клетчатки для пищеварения. Идеальны для диет.</p>
+        <button onclick="openModal('Пшеничные отруби')">Заказать</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Модальное окно заказа -->
+  <div class="modal" id="order-modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <h2>Оформить заказ</h2>
+      <p id="product-name" style="font-weight: bold;"></p>
+      <form id="order-form">
+        <input type="text" name="name" placeholder="Ваше имя" required />
+        <input type="tel" name="phone" placeholder="Телефон" required />
+        <input type="text" name="city" placeholder="Город доставки" required />
+        <button type="submit">Отправить</button>
+        <button type="button" onclick="closeModal()">Отмена</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модальное окно изображений -->
+  <div class="image-modal" id="image-modal">
+    <div class="image-modal-content">
+      <span class="modal-close" onclick="closeImageModal()">&times;</span>
+      <span class="image-nav image-prev" onclick="changeImage(-1)">&#10094;</span>
+      <img src="" id="modal-img" />
+      <span class="image-nav image-next" onclick="changeImage(1)">&#10095;</span>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Мука и Отруби</p>
+  </footer>
+
+  <script>
+    function openModal(productName) {
+      document.getElementById('order-modal').classList.add('active');
+      document.getElementById('product-name').textContent = productName;
+    }
+
+    function closeModal() {
+      document.getElementById('order-modal').classList.remove('active');
+      document.getElementById('order-form').reset();
+    }
+
+    document.getElementById('order-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Спасибо за заказ: ' + document.getElementById('product-name').textContent);
+      closeModal();
+    });
+
+    // Модальное изображение с переключением
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function openImageModal(imgElement) {
+      const container = imgElement.parentElement;
+      currentImages = container.getAttribute('data-images').split(',');
+      currentIndex = Array.from(container.children).indexOf(imgElement);
+      showCurrentImage();
+      document.getElementById('image-modal').classList.add('active');
+    }
+
+    function showCurrentImage() {
+      const img = document.getElementById('modal-img');
+      img.src = currentImages[currentIndex];
+    }
+
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = currentImages.length - 1;
+      if (currentIndex >= currentImages.length) currentIndex = 0;
+      showCurrentImage();
+    }
+
+    function closeImageModal() {
+      document.getElementById('image-modal').classList.remove('active');
+      document.getElementById('modal-img').src = '';
+    }
+  </script>
+</body>
+</html>
