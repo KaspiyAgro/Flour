@@ -328,10 +328,23 @@
     }
 
     document.getElementById('order-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      alert('Спасибо за заказ: ' + document.getElementById('product-name').textContent);
-      closeModal();
-    });
+  e.preventDefault();
+  
+  const name = this.name.value.trim();
+  const phone = this.phone.value.trim();
+  const city = this.city.value.trim();
+  const product = document.getElementById('product-name').textContent.trim();
+
+  const message = `Здравствуйте! Хочу заказать: ${product}%0AИмя: ${name}%0AТелефон: ${phone}%0AГород: ${city}`;
+
+  // Укажи свой номер WhatsApp вместо 79999999999
+  const whatsappLink = `https://wa.me/79999999999?text=${message}`;
+
+  window.open(whatsappLink, '_blank');
+
+  closeModal();
+});
+
 
     // Модальное изображение с переключением
     let currentImages = [];
