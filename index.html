@@ -1,13 +1,84 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Главная | Мука и Отруби</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      height: 60px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #f4a261;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.95);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #444;
+    }
+
+    p {
+      line-height: 1.7;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .section-img {
+      display: block;
+      max-width: 100%;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Логотип" class="logo" />
+    <img src="logo.png" alt="Логотип" class="logo">
     <nav>
       <a href="index.html">Главная</a>
       <a href="products.html">Продукция</a>
@@ -17,24 +88,21 @@
   </header>
 
   <main>
-    <h1>Общество с ограниченой ответственностью "Каспий Агро"</h1>
-    <p>Динамично развивающаяся агроторговая компания, успешно работающая на рынке более 5 лет. Основным направлением деятельности компании является оптовая продажа высококачественной муки и отрубей, производимых на российских мукомольных предприятиях, с последующей поставкой в страны Средней Азии, включая Казахстан, Узбекистан и другие перспективные рынки.</p>
-    
-    <h2>Почему выбирают нас?</h2>
-    <ul>
-      <li>Более 5 лет опыта</li>
-      <li>Экологически чистый продукт</li>
-      <li>Доставка в Россию, Казахстан и Узбекистан</li>
-    </ul>
+    <h1>ООО «Каспий Агро»</h1>
+    <p>ООО «Каспий Агро» — динамично развивающаяся агроторговая компания, успешно работающая на рынке более 5 лет. Основным направлением деятельности компании является оптовая продажа высококачественной муки и отрубей, производимых на российских мукомольных предприятиях, с последующей поставкой в страны Средней Азии, включая Казахстан, Узбекистан и другие перспективные рынки.</p>
+    <img src="main1.jpg" alt="Пшеничное поле" class="section-img">
 
-    <div class="photos">
-      <img src="photo1.jpg" alt="Мука" />
-      <img src="photo2.jpg" alt="Отруби" />
-    </div>
+    <p>Мы специализируемся на обеспечении стабильных поставок зернопродуктов, соответствующих всем стандартам качества, предлагая выгодные условия сотрудничества как крупным, так и средним предприятиям пищевой и перерабатывающей промышленности.</p>
+    <img src="photo1.jpg" alt="Мука высокого качества" class="section-img">
+
+    <p>Благодаря надежной логистике, индивидуальному подходу к каждому клиенту и глубокому знанию региональных особенностей рынка, «Каспий Агро» зарекомендовала себя как ответственный и профессиональный партнер.</p>
+    <img src="main3.jpg" alt="Производство и поставки" class="section-img">
+
+    <p>Наша цель — способствовать развитию агробизнеса в регионе, обеспечивая доступность качественного сырья и строя отношения на принципах доверия, прозрачности и долгосрочного сотрудничества.</p>
   </main>
 
   <footer>
-    <p>&copy; 2025 Мука и Отруби</p>
+    <p>&copy; 2025 ООО «Каспий Агро»</p>
   </footer>
 </body>
 </html>
